@@ -1,5 +1,6 @@
-var casper  = require('casper').create();
+var casper  = require('casper').create({ verbose: true });
 var fs      = require('fs');
+var players = [];
 
 // Player rows:
 // div.view.view-players-list > div.view-content > table > tbody > tr
@@ -40,32 +41,35 @@ function getData() {
     return data;
 }
 
-var fetch = function(){
-  players = this.evaluate(getData);
-  existingPlayers = fs.read('data/mls.json');
-
-  if(existingPlayers){
-    players = JSON.parse(existingPlayers).concat(players);
-  }
-
-  fs.write('data/mls.json', JSON.stringify(players), 'w');
+function fetch(players){
+  data = this.evaluate(getData);
+  this.echo(data.length + " new players");
+  players = players.concat(data);
 
   var next = 'li.pager-next a';
   if(casper.visible(next)){
+    var that = this;
+
     casper.echo('Fetching next page');
     casper.thenClick(next);
-    casper.then(fetch);
+
+    casper.then(function(){
+      fetch.call(that, players);
+    });
   } else {
+    fs.write('data/mls.json', JSON.stringify(players), 'w');
     casper.echo('Finished fetching player data.');
   }
 }
 
 casper.start('http://www.mlssoccer.com/players?field_player_club_nid=All&tid_2=197&title=', function(){});
 
-casper.then(fetch);
+casper.then(function(){
+  fetch.call(this, players);
+});
 
 casper.on('remote.message', function(msg) {
-    console.log('[Remote Page] ' + msg);
+  console.log('[Remote Page] ' + msg);
 });
 
 casper.run(function(){

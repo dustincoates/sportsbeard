@@ -34,7 +34,9 @@ function getData() {
           age: row.querySelector('.views-field-field-player-birth-date-value-1').innerText,
           height: row.querySelector('.views-field-field-player-height-value').innerText,
           weight: row.querySelector('.views-field-field-player-weight-value').innerText,
-          birthCountry: row.querySelector('.views-field-field-player-birth-country-value').innerText
+          birthCountry: row.querySelector('.views-field-field-player-birth-country-value').innerText,
+          sport: 'soccer',
+          league: 'MLS'
         });
     });
 

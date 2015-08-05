@@ -1,2 +1,3 @@
 data/*.json
+photos/**/*.jpg
 node_modules/*

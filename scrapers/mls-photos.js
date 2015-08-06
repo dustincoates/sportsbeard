@@ -9,7 +9,8 @@ function fetchImage(){
 }
 
 function imageFileName(url){
-  return url.match(/head-shots\/(.+)/)[1];
+  var match = url.match(/head-shots\/(.+)/);
+  return match && match[1];
 }
 
 casper.start().each(players, function(self, player){
@@ -21,7 +22,9 @@ casper.start().each(players, function(self, player){
 
     player.image = fileName;
 
-    this.download(imageUrl, 'photos/mls/' + fileName);
+    if(fileName){
+      this.download(imageUrl, 'photos/mls/' + fileName);
+    }
   });
 });
 

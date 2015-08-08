@@ -1,5 +1,14 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  #player(data-id=_id)
+    img(src=league + "/" + image, alt="Player Image")
+    button#none None
+    button#moustache Moustache
+    button#beard Beard
+    button#goatee Goatee
+    button#other Other
+    button#remove Remove
+
+  script(type="text/javascript", src="javascripts/player.js")
+  script(type="text/javascript", src="javascripts/controls.js")

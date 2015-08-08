@@ -13,7 +13,11 @@ var Player = mongoose.model('Player', {
   birthCountry: String,
   sport: String,
   league: String,
-  facialHairType: {type: String, enum: ['none', 'moustache', 'beard', 'goatee', 'other']}
+  facialHairType: {
+    type: String,
+    enum: ['none', 'moustache', 'beard', 'goatee', 'other']
+  },
+  removed: Boolean
 });
 
 module.exports = Player;

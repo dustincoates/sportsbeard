@@ -1,6 +1,7 @@
 var casper  = require('casper').create({ verbose: true });
 var fs      = require('fs');
 var players = [];
+var url     = 'http://www.mlssoccer.com/players?field_player_club_nid=All&tid_2=197&title=';
 
 // Player rows:
 // div.view.view-players-list > div.view-content > table > tbody > tr
@@ -44,7 +45,7 @@ function getData() {
 }
 
 function fetch(players){
-  data = this.evaluate(getData);
+  var data = this.evaluate(getData);
   this.echo(data.length + " new players");
   players = players.concat(data);
 
@@ -64,17 +65,12 @@ function fetch(players){
   }
 }
 
-casper.start('http://www.mlssoccer.com/players?field_player_club_nid=All&tid_2=197&title=', function(){});
+casper.start(url, function(){});
 
 casper.then(function(){
   fetch.call(this, players);
 });
 
-casper.on('remote.message', function(msg) {
-  console.log('[Remote Page] ' + msg);
-});
-
 casper.run(function(){
   this.exit();
 });
-

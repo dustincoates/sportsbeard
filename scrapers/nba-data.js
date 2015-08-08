@@ -18,7 +18,10 @@ function gatherPlayers(data, callback){
     return {
       name: rearrangeName(player[1]),
       url: assembleUrl(player[5]),
-      team: player[8]
+      playerCode: player[5],
+      team: player[8],
+      league: 'NBA',
+      sport: 'basketball'
     };
   });
 

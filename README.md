@@ -5,6 +5,7 @@ A selection of scripts that grabs player photos (and some additional data depend
 - Node
 - PhantomJS
 - CasperJS
+- Mongo
 
 ### Running the Scripts
 

@@ -1,0 +1,17 @@
+#! /bin/bash
+
+casperjs scrapers/mlb-data.js
+node scrapers/mlb-photos.js
+node data-loaders/mlb.js
+
+casperjs scrapers/mls-data.js
+casperjs scrapers/mls-photos.js
+node data-loaders/mls.js
+
+casperjs scrapers/nfl-data.js
+casperjs scrapers/nfl-photos.js
+node data-loaders/nfl.js
+
+node scrapers/nfl-data.js
+node scrapers/nfl-photos.js
+node data-loaders/nfl.js

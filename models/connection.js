@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 function uri() {
-  environment = process.env.NODE_ENV || "development";
+  var environment = process.env.NODE_ENV || "development";
   if (environment === "development") {
     return "mongodb://localhost/sportsBeard";
   } else{
